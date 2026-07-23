@@ -1,41 +1,34 @@
-// Start date (21 December 2025, 12:00 AM)
-const startDate = new Date("December 21, 2025 00:00:00").getTime();
+const startDate = new Date("December 21, 2025 00:00:00");
 
 function updateCounter() {
+    const now = new Date();
 
-    const now = new Date().getTime();
+    let years = now.getFullYear() - startDate.getFullYear();
+    let months = now.getMonth() - startDate.getMonth();
+    let days = now.getDate() - startDate.getDate();
 
-    let difference = now - startDate;
-
-    // If the date hasn't arrived yet
-    if (difference < 0) {
-        difference = 0;
+    if (days < 0) {
+        months--;
+        const lastMonth = new Date(now.getFullYear(), now.getMonth(), 0);
+        days += lastMonth.getDate();
     }
 
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    if (months < 0) {
+        years--;
+        months += 12;
+    }
 
-    const hours = Math.floor(
-        (difference % (1000 * 60 * 60 * 24))
-        / (1000 * 60 * 60)
-    );
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const seconds = now.getSeconds();
 
-    const minutes = Math.floor(
-        (difference % (1000 * 60 * 60))
-        / (1000 * 60)
-    );
-
-    const seconds = Math.floor(
-        (difference % (1000 * 60))
-        / 1000
-    );
-
+    document.getElementById("years").textContent = years;
+    document.getElementById("months").textContent = months;
     document.getElementById("days").textContent = days;
-    document.getElementById("hours").textContent = hours;
-    document.getElementById("minutes").textContent = minutes;
-    document.getElementById("seconds").textContent = seconds;
-
+    document.getElementById("hours").textContent = String(hours).padStart(2, "0");
+    document.getElementById("minutes").textContent = String(minutes).padStart(2, "0");
+    document.getElementById("seconds").textContent = String(seconds).padStart(2, "0");
 }
 
 updateCounter();
-
 setInterval(updateCounter, 1000);
