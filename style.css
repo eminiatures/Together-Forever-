@@ -127,3 +127,29 @@ font-size:3rem;
 }
 
 }
+.since{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+margin:30px 0 10px;
+}
+
+.line{
+width:180px;
+height:1px;
+background:rgba(255,255,255,.3);
+}
+
+.since span{
+font-size:22px;
+color:#ff8ec9;
+text-shadow:0 0 10px hotpink;
+}
+
+.since-date{
+letter-spacing:3px;
+font-size:18px;
+color:#ffd4ec;
+margin-bottom:35px;
+}
